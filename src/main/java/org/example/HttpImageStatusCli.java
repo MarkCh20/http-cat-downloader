@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HttpImageStatusCli {
@@ -9,23 +10,26 @@ public class HttpImageStatusCli {
 
     public void askStatus() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter HTTP status code:");
 
-        String input = scanner.nextLine();
+        while (true) {
+            System.out.println("Enter HTTP status code:");
 
-        int code;
-        try {
-            code = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid number.");
-            return;
-        }
+            int code;
+            try {
+                code = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number.");
+                scanner.nextLine();
+                continue;
+            }
 
-        try {
-            downloader.downloadStatusImage(code);
-            System.out.println("Download completed successfully.");
-        } catch (IOException e) {
-            System.out.println("There is no image for HTTP status " + code);
+            try {
+                downloader.downloadStatusImage(code);
+                System.out.println("Download completed successfully.");
+                break;
+            } catch (IOException e) {
+                System.out.println("There is no image for HTTP status " + code);
+            }
         }
     }
 }

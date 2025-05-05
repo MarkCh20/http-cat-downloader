@@ -2,7 +2,7 @@
 
 This project allows users to download a cat image corresponding to an HTTP status code from the website https://http.cat.
 
-##Table of Contents
+## Table of Contents
 
 1. [Introduction](#introduction)
 2. [Features](#features)

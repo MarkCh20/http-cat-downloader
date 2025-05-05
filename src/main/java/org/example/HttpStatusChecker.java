@@ -16,7 +16,7 @@ public class HttpStatusChecker {
         int responseCode = connection.getResponseCode();
         connection.disconnect();
 
-        if (responseCode == 404) {
+        if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
             throw new IOException("Image not found for HTTP status code: " + code);
         }
 
